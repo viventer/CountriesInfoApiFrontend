@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function GenerateApiKeyButton() {
+export default function GetApiKeyButton() {
   return <div>GenerateApiKeyButton</div>;
 }

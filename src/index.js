@@ -6,32 +6,32 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./globalElements/styles/GlobalStyles";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const theme = {
+  // palette: https://coolors.co/palette/1f2421-216869-49a078-9cc5a1-dce1de
   colors: {
-    darkBlue: "#001219A",
-    blue: "#005f73",
-    lightBlue: "#0a9396",
-    veryLightBlue: "#94d2bd",
-    cream: "#e9d8a6",
-    orange: "ee9b00",
-    darkOrange: "ca6702",
-    veryDarkOrange: "bb3e03",
-    red: "ae2012jkA",
-    claret: "9b2226",
-    darkGray: "#181818",
+    darkGray: "#1F2421",
+    darkBlue: "#216869",
+    green: "#49A078",
+    lightGreen: "#9CC5A1",
+    darkGreen: "#407756",
+    lightGray: "#DCE1DE",
   },
 };
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/*" element={<App />} />
-        </Routes>
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/*" element={<App />} />
+          </Routes>
+        </BrowserRouter>
+      </Provider>
     </ThemeProvider>
   </React.StrictMode>
 );

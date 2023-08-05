@@ -7,8 +7,13 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
   body {
-    font-family: "Ubuntu", sans-serif;
+    font-family: 'Ubuntu', sans-serif;
     color: white;
     background-color: ${({ theme }) => theme.colors.darkGray};
+  }
+  .flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;
