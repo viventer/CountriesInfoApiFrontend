@@ -21,7 +21,7 @@ export default function Header() {
         <FontAwesomeIcon icon={faEarthAmericas} className="icon" />
         <h1>Countries Info API</h1>
       </div>
-      {loggedIn ? (
+      {!loggedIn ? (
         <div className="flex">
           <SignUpButton />
           <SignInButton />

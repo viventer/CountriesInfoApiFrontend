@@ -4,9 +4,9 @@ import Header from "./Header";
 
 export default function Layout() {
   return (
-    <main className="App">
+    <div className="App">
       <Header />
       <Outlet />
-    </main>
+    </div>
   );
 }

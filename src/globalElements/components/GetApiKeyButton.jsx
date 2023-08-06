@@ -1,5 +1,5 @@
-import React from "react";
+import { StyledGetApiKeyButton } from "../styles/Header.styled";
 
 export default function GetApiKeyButton() {
-  return <div>GenerateApiKeyButton</div>;
+  return <StyledGetApiKeyButton>Get API key</StyledGetApiKeyButton>;
 }

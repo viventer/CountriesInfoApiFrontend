@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
 import Layout from "./globalElements/components/Layout";
-import Main from "./pages/main/components/Main";
+import Home from "./pages/home/components/Home";
 import SignIn from "./pages/login/components/SignIn";
 import SignUp from "./pages/login/components/SignUp";
 import Unauthorized from "./globalElements/components/Unauthorized";
@@ -14,7 +14,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<Main />} />
+        <Route index element={<Home />} />
         <Route path="howtostart" element={<HowToStart />} />
 
         <Route path="signin" element={<SignIn />} />
