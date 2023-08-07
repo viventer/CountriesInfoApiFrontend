@@ -6,6 +6,8 @@ export const StyledHeader = styled.header`
   gap: 1rem;
   padding: 0.5rem 1rem;
   background-color: ${({ theme }) => theme.colors.darkGreen};
+  border-bottom: 0.1rem solid white;
+  margin-bottom: 2rem;
 
   h1 {
     font-size: 1.7rem;
@@ -72,7 +74,7 @@ export const StyledSignInButton = styled.button`
   @media (max-width: 465px) {
     display: none;
   }
-  @media (max-width: 465px) {
+  @media (max-width: 375px) {
     display: flex;
   }
 `;

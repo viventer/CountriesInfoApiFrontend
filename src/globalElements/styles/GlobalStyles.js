@@ -11,6 +11,11 @@ export const GlobalStyles = createGlobalStyle`
     color: white;
     background-color: ${({ theme }) => theme.colors.darkGray};
   }
+  main {
+    width: 95%;
+    margin-right: auto;
+    margin-left: auto;
+  }
   .flex {
     display: flex;
     align-items: center;
