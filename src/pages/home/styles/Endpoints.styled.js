@@ -59,3 +59,7 @@ export const StyledSeparateEndpoint = styled.article`
     }
   }
 `;
+
+export const StyledSeparateEndpointDetails = styled.section`
+  background-color: rgba(33, 104, 105, 0.25);
+`;
