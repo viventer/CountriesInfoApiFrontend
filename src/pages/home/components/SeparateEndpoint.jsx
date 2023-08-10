@@ -6,7 +6,12 @@ import { useState } from "react";
 import { StyledSeparateEndpoint } from "../styles/Endpoints.styled";
 import SeparateEndpointDetails from "./SeparateEndpointDetails";
 
-export default function SeparateEndpoint({ url, description, exampleUrl }) {
+export default function SeparateEndpoint({
+  url,
+  description,
+  exampleUrl,
+  exampleResponse,
+}) {
   const [showDetails, setShowDetails] = useState(false);
 
   function handleShowDetailsClicked() {
@@ -20,7 +25,12 @@ export default function SeparateEndpoint({ url, description, exampleUrl }) {
         <p>{`/${url}`}</p>
       </div>
       <p>{description}</p>
-      {showDetails && <SeparateEndpointDetails />}
+      {showDetails && (
+        <SeparateEndpointDetails
+          exampleUrl={exampleUrl}
+          exampleResponse={exampleResponse}
+        />
+      )}
       <button onClick={handleShowDetailsClicked}>
         <FontAwesomeIcon
           icon={showDetails ? faChevronUp : faChevronDown}

@@ -3,22 +3,114 @@
     {
       "url": "countries-info",
       "description": "Sends back information about all countries.",
-      "exampleUrl": "countries-info"
+      "exampleUrl": "countries-info",
+      "exampleResponse": [
+        {
+          "name": "Afghanistan",
+          "ISO_A2": "AF",
+          "ISO_A3": "AFG",
+          "currencies": ["Afghan Afghani"],
+          "languages": ["Pashto", "Dari"],
+          "capitalCity": "Kabul",
+          "continents": ["Asia"],
+          "population": 32225560,
+          "mainReligion": "Islam",
+          "area": 652230,
+          "nominalGDPPerCapita": 507.1,
+          "drivingSide": "right",
+          "domain": "af"
+        },
+        {
+          "name": "Albania",
+          "ISO_A2": "AL",
+          "ISO_A3": "ALB"
+        }
+      ]
     },
     {
       "url": "countries-info:countryCode",
       "description": "Sends back information about a specific country. Provide ISO A3 or ISO A2 country code.",
-      "exampleUrl": "countries-info/PL"
+      "exampleUrl": "countries-info/PL",
+      "exampleResponse": {
+        "name": "Poland",
+        "ISO_A2": "PL",
+        "ISO_A3": "POL",
+        "currencies": ["Polish Zloty"],
+        "languages": ["Polish"],
+        "capitalCity": "Warsaw",
+        "continents": ["Europe"],
+        "population": 37846611,
+        "mainReligion": "Christianity",
+        "area": 312696,
+        "nominalGDPPerCapita": 16882.1,
+        "drivingSide": "right",
+        "domain": "pl"
+      }
     },
     {
       "url": "countries-borders",
       "description": "Sends back borders of all countries in geojson format.",
-      "exampleUrl": "countries-borders"
+      "exampleUrl": "countries-borders",
+      "exampleResponse": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [1.707006470000067, 42.5027814740001],
+                  [1.752688435000067, 42.576678772000065],
+                  [1.721992635000049, 42.60985504200008],
+                  [1.608304484000144, 42.61812327100003],
+                  [1.543088827000133, 42.64936167400003],
+                  [1.466814412000105, 42.641455180000065]
+                ]
+              ]
+            },
+            "properties": {
+              "ADMIN": "Andorra",
+              "ISO_A3": "AND",
+              "ISO_A2": "AD"
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [7.437454032063101, 43.743360540917394],
+                  [7.432845087000061, 43.739852548000073],
+                  [7.417956880000105, 43.730903825000041]
+                ]
+              ]
+            },
+            "properties": { "ADMIN": "Monaco", "ISO_A3": "MCO", "ISO_A2": "MC" }
+          }
+        ]
+      }
     },
     {
       "url": "countries-borders:countryCode",
       "description": "Sends back borders of specific country in geojson format. Provide ISO A3 or ISO A2 country code.",
-      "exampleUrl": "countries-borders/PL"
+      "exampleUrl": "countries-borders/AND",
+      "exampleResponse": {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [1.707006470000067, 42.5027814740001],
+              [1.752688435000067, 42.576678772000065],
+              [1.721992635000049, 42.60985504200008],
+              [1.608304484000144, 42.61812327100003]
+            ]
+          ]
+        },
+        "properties": { "ADMIN": "Andorra", "ISO_A3": "AND", "ISO_A2": "AD" }
+      }
     }
   ]
 }
