@@ -28,6 +28,32 @@ export default function EndpointsList() {
     },
   ];
 
+  (async function makeQueriesForExampleResponses() {
+    await Promise.all(
+      endpoints.map(async (endpoint) => {
+        endpoint.exampleResponse = await getExampleResponse(
+          endpoint.exampleUrl
+        );
+      })
+    );
+  })();
+
+  async function getExampleResponse(url) {
+    try {
+      let response = await fetch(`http://localhost:3500/${url}`, {
+        method: "GET",
+        headers: {
+          username: "tom1",
+          "x-api-key": "1c71ff02d90a41ecb4b6f9f7b8b3facd",
+        },
+      });
+      response = await response.json();
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const endpointsComponents = endpoints.map((endpoint) => (
     <SeparateEndpoint
       key={endpoint.url}
