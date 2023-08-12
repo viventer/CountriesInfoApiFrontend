@@ -12,12 +12,6 @@ export default function SeparateEndpoint({
   exampleUrl,
   exampleResponse,
 }) {
-  const [showDetails, setShowDetails] = useState(false);
-
-  function handleShowDetailsClicked() {
-    setShowDetails((prev) => !prev);
-  }
-
   return (
     <StyledSeparateEndpoint>
       <div className="flex">
@@ -25,18 +19,10 @@ export default function SeparateEndpoint({
         <p>{`/${url}`}</p>
       </div>
       <p>{description}</p>
-      {showDetails && (
-        <SeparateEndpointDetails
-          exampleUrl={exampleUrl}
-          exampleResponse={exampleResponse}
-        />
-      )}
-      <button onClick={handleShowDetailsClicked}>
-        <FontAwesomeIcon
-          icon={showDetails ? faChevronUp : faChevronDown}
-          className="icon"
-        />
-      </button>
+      <SeparateEndpointDetails
+        exampleUrl={exampleUrl}
+        exampleResponse={exampleResponse}
+      />
     </StyledSeparateEndpoint>
   );
 }

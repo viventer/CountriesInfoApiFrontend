@@ -34,10 +34,15 @@ export const StyledSeparateEndpoint = styled.article`
   }
   & > button {
     color: white;
-    background-color: rgba(33, 104, 105, 0.1);
+    background-color: rgba(33, 104, 105, 0.25);
     border: none;
     width: 100%;
     border-radius: 0 0 0.3rem 0.3rem;
+    border-top: 0.1rem solid rgba(255, 255, 255, 0.5);
+    padding: 0.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   @media (min-width: 600px) {
@@ -62,4 +67,11 @@ export const StyledSeparateEndpoint = styled.article`
 
 export const StyledSeparateEndpointDetails = styled.section`
   background-color: rgba(33, 104, 105, 0.25);
+
+  h3 {
+    padding: 1rem 1rem 0.5rem 1rem;
+  }
+  p {
+    padding: 0 1rem 0.5rem 1rem;
+  }
 `;

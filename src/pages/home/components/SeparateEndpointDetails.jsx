@@ -12,16 +12,16 @@ export default function SeparateEndpointDetails({
 
   const reactJsonTheme = {
     base00: "rgba(0, 0, 0, 0.25)", // background
-    base01: "", // nothing
+    base01: "",
     base02: "white", // lines
-    base03: "", // nothing
+    base03: "",
     base04: theme.colors.lightGreen, // other number of items
-    base05: "white", // nothing
-    base06: "", // nothing
-    base07: "yellow", // keys
-    base08: "", // nothing
-    base09: "white", // values
-    base0A: "", // nothing
+    base05: "",
+    base06: "",
+    base07: "white", // keys
+    base08: "",
+    base09: "yellow", // values
+    base0A: "",
     base0B: theme.colors.lightBlue, // float type
     base0C: theme.lightGreen, // number of items
     base0D: "white", // expanding
@@ -30,14 +30,18 @@ export default function SeparateEndpointDetails({
   };
   return (
     <StyledSeparateEndpointDetails>
-      <h3>By sending a GET request to a URL similar to this:</h3>
+      <h3>Example request URL:</h3>
       <p>{`http://localhost:3500/${exampleUrl}`}</p>
-      <h3>You will receive a response similar to this:</h3>
+      <h3>Example response:</h3>
       <ReactJson
         src={exampleResponse}
-        collapsed={2}
+        collapsed={true}
         theme={reactJsonTheme}
-        style={{ fontSize: "0.9rem" }}
+        style={{
+          fontSize: "0.9rem",
+          padding: "0.5rem 1rem",
+          borderTop: "0.1rem solid rgba(255, 255, 255, 0.5",
+        }}
       />
     </StyledSeparateEndpointDetails>
   );
