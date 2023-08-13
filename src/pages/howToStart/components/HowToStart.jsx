@@ -1,4 +1,5 @@
 import GetApiKeyButton from "../../../globalElements/components/GetApiKeyButton";
+import EndpointsButton from "./EndpointsButton";
 import { StyledHowToStart } from "../styles/HowToStart.styled";
 
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -23,20 +24,29 @@ await fetch("http://localhost:3500/countries-info", {
         </li>
         <li>
           <p>Generate your API key here:</p>
-          <GetApiKeyButton />
         </li>
+        <GetApiKeyButton />
         <li>
           <p>
             Put your API key and username in the header of your request, for
             example:
           </p>
-          <SyntaxHighlighter language="javascript" style={dracula}>
-            {exampleRequest.trim()}
-          </SyntaxHighlighter>
         </li>
+        <SyntaxHighlighter
+          language="javascript"
+          style={dracula}
+          customStyle={{
+            fontSize: "1.5rem",
+            marginBottom: "2rem",
+            padding: "0.5rem 1rem",
+          }}
+        >
+          {exampleRequest.trim()}
+        </SyntaxHighlighter>
         <li>
           <p>Now you can create request to these endpoints:</p>
         </li>
+        <EndpointsButton />
       </ol>
     </StyledHowToStart>
   );

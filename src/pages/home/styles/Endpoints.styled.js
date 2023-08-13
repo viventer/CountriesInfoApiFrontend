@@ -7,7 +7,7 @@ export const StyledEndpointsList = styled.section`
 `;
 
 export const StyledSeparateEndpoint = styled.article`
-  margin: 1.5rem 0;
+  margin: 2rem 0 0 0;
   max-width: 70rem;
   & > .flex {
     gap: 1rem;

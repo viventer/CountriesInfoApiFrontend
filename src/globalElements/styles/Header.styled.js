@@ -80,5 +80,15 @@ export const StyledSignInButton = styled.button`
 `;
 
 export const StyledGetApiKeyButton = styled.button`
+  font-size: 1.4rem;
+  color: white;
   border: 0.15rem solid white;
+  border-radius: 0.7rem;
+  padding: 0.4rem;
+  background-color: ${({ theme }) => theme.colors.darkGreen};
+
+  &:hover {
+    filter: brightness(0.9);
+    cursor: pointer;
+  }
 `;
