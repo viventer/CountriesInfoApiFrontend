@@ -1,5 +1,3 @@
-import React from "react";
-
 import { StyledSignInButton } from "../styles/Header.styled";
 
 export default function SignInButton() {

@@ -32,17 +32,18 @@ await fetch("http://localhost:3500/countries-info", {
             example:
           </p>
         </li>
-        <SyntaxHighlighter
-          language="javascript"
-          style={dracula}
-          customStyle={{
-            fontSize: "1.5rem",
-            marginBottom: "2rem",
-            padding: "0.5rem 1rem",
-          }}
-        >
-          {exampleRequest.trim()}
-        </SyntaxHighlighter>
+        <div>
+          <SyntaxHighlighter
+            language="javascript"
+            style={dracula}
+            customStyle={{
+              marginBottom: "2rem",
+              padding: "0.5rem 1rem",
+            }}
+          >
+            {exampleRequest.trim()}
+          </SyntaxHighlighter>
+        </div>
         <li>
           <p>Now you can create request to these endpoints:</p>
         </li>

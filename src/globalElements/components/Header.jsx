@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEarthAmericas } from "@fortawesome/free-solid-svg-icons";
@@ -19,7 +20,11 @@ export default function Header() {
     <StyledHeader>
       <div className="flex">
         <FontAwesomeIcon icon={faEarthAmericas} className="icon" />
-        <h1>Countries Info API</h1>
+        <button>
+          <Link to="/" className="reactRouterLink">
+            <h1>Countries Info API</h1>
+          </Link>
+        </button>
       </div>
       {!loggedIn ? (
         <div className="flex">

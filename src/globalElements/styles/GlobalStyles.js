@@ -10,6 +10,7 @@ export const GlobalStyles = createGlobalStyle`
     font-family: 'Ubuntu', sans-serif;
     color: white;
     background-color: ${({ theme }) => theme.colors.darkGray};
+    margin-bottom: 2rem;
   }
   main {
     width: 95%;
@@ -20,5 +21,10 @@ export const GlobalStyles = createGlobalStyle`
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .reactRouterLink {
+    color: white;
+    text-decoration: none;
   }
 `;

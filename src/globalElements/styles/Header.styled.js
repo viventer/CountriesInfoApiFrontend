@@ -13,6 +13,10 @@ export const StyledHeader = styled.header`
     font-size: 1.7rem;
   }
 
+  & button:first-of-type {
+    border: none;
+  }
+
   & .icon {
     font-size: 1.7rem;
     margin-right: 0.5rem;
