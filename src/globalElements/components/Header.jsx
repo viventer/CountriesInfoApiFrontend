@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEarthAmericas } from "@fortawesome/free-solid-svg-icons";
@@ -16,11 +16,13 @@ export default function Header() {
   const currentUser = useSelector(selectCurrentUser);
   const [loggedIn, setLoggedIn] = useState(currentUser ? true : false);
 
+  const { pathname } = useLocation();
+
   return (
     <StyledHeader>
       <div className="flex">
         <FontAwesomeIcon icon={faEarthAmericas} className="icon" />
-        <button>
+        <button disabled={pathname === "/"}>
           <Link to="/" className="reactRouterLink">
             <h1>Countries Info API</h1>
           </Link>
