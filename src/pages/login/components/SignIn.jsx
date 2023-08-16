@@ -5,14 +5,16 @@ import { useDispatch } from "react-redux";
 import { setCredentials } from "../slices/authSlice";
 import { useLoginMutation } from "../slices/authApiSlice";
 
+import HashLoader from "react-spinners/HashLoader";
+
 import usePersist from "../../../hooks/usePersist";
 
 import ErrorInfo from "./ErrorInfo";
+import SignInForm from "./SignInForm";
 import { StyledSignIn } from "../styles/Login.styled";
 
-const Login = () => {
+export default function Login() {
   const usernameRef = useRef();
-  const errRef = useRef();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
@@ -49,62 +51,32 @@ const Login = () => {
       } else {
         setErrMsg(err.data?.message);
       }
-      errRef.current.focus();
     }
   };
 
   const handleUserInput = (e) => setUsername(e.target.value);
   const handlePwdInput = (e) => setPassword(e.target.value);
-  const handleToggle = () => setPersist((prev) => !prev);
+  const handlePersistToggle = () => setPersist((prev) => !prev);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <HashLoader color="fff" />;
 
   const content = (
     <StyledSignIn>
       <h2>Employee Login</h2>
-      {errMsg && (
-        <ErrorInfo ref={errRef} aria-live="assertive" message={errMsg} />
-      )}
-
-      <form className="form" onSubmit={handleSubmit}>
-        <label htmlFor="username">Username:</label>
-        <input
-          className="form__input"
-          type="text"
-          id="username"
-          ref={usernameRef}
-          value={username}
-          onChange={handleUserInput}
-          autoComplete="off"
-          required
-        />
-
-        <label htmlFor="password">Password:</label>
-        <input
-          className="form__input"
-          type="password"
-          id="password"
-          onChange={handlePwdInput}
-          value={password}
-          required
-        />
-        <button className="form__submit-button">Sign In</button>
-
-        <label htmlFor="persist" className="form__persist">
-          <input
-            type="checkbox"
-            className="form__checkbox"
-            id="persist"
-            onChange={handleToggle}
-            checked={persist}
-          />
-          Trust This Device
-        </label>
-      </form>
+      {errMsg && <ErrorInfo aria-live="assertive" message={errMsg} />}
+      <SignInForm
+        handlers={{
+          handleSubmit,
+          handleUserInput,
+          handlePwdInput,
+          handlePersistToggle,
+        }}
+        loginData={{ username, password, persist }}
+        usernameRef={usernameRef}
+      />
       <Link to="/">Back to Home</Link>
     </StyledSignIn>
   );
 
   return content;
-};
-export default Login;
+}
