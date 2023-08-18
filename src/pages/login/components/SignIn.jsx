@@ -1,9 +1,12 @@
 import { useRef, useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
-import { setCredentials } from "../slices/authSlice";
-import { useLoginMutation } from "../slices/authApiSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectCurrentUser,
+  setCredentials,
+} from "../../../globalElements/slices/authSlice";
+import { useLoginMutation } from "../../../globalElements/slices/authApiSlice";
 
 import HashLoader from "react-spinners/HashLoader";
 
@@ -14,6 +17,16 @@ import SignInForm from "./SignInForm";
 import { StyledSignIn } from "../styles/Login.styled";
 
 export default function Login() {
+  const currentUser = useSelector(selectCurrentUser);
+
+  useEffect(() => {
+    if (currentUser) {
+      console.log("tak");
+      navigate("/");
+    }
+    console.log(currentUser);
+  }, []);
+
   const usernameRef = useRef();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -21,6 +34,9 @@ export default function Login() {
   const [persist, setPersist] = usePersist();
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   const dispatch = useDispatch();
 
   const [login, { isLoading }] = useLoginMutation();
@@ -37,10 +53,10 @@ export default function Login() {
     e.preventDefault();
     try {
       const { accessToken } = await login({ username, password }).unwrap();
-      dispatch(setCredentials({ accessToken }));
+      dispatch(setCredentials({ username, accessToken }));
       setUsername("");
       setPassword("");
-      navigate("/");
+      navigate(from, { replace: true });
     } catch (err) {
       if (!err.status) {
         setErrMsg("No Server Response");
@@ -62,8 +78,8 @@ export default function Login() {
 
   const content = (
     <StyledSignIn>
-      <h2>Employee Login</h2>
-      {errMsg && <ErrorInfo aria-live="assertive" message={errMsg} />}
+      {!errMsg && <ErrorInfo aria-live="assertive" message={errMsg} />}
+      <h2>Sign in</h2>
       <SignInForm
         handlers={{
           handleSubmit,
@@ -74,7 +90,6 @@ export default function Login() {
         loginData={{ username, password, persist }}
         usernameRef={usernameRef}
       />
-      <Link to="/">Back to Home</Link>
     </StyledSignIn>
   );
 

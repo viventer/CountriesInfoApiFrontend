@@ -2,7 +2,7 @@ import { StyledErrorInfo } from "../styles/Login.styled";
 
 export default function ErrorInfo({ message }) {
   return (
-    <StyledErrorInfo>
+    <StyledErrorInfo className={!message && "hide"}>
       <p>{message}</p>
     </StyledErrorInfo>
   );

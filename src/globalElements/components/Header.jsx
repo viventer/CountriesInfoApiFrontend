@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,9 +14,12 @@ import { useSelector } from "react-redux";
 
 export default function Header() {
   const currentUser = useSelector(selectCurrentUser);
-  const [loggedIn, setLoggedIn] = useState(currentUser ? true : false);
 
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    console.log(currentUser);
+  }, [currentUser]);
 
   return (
     <StyledHeader>
@@ -28,7 +31,7 @@ export default function Header() {
           </Link>
         </button>
       </div>
-      {!loggedIn ? (
+      {!currentUser ? (
         <div className="flex">
           <SignUpButton />
           <SignInButton />

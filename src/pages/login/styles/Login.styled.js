@@ -1,7 +1,98 @@
 import styled from "styled-components";
 
-export const StyledSignIn = styled.main``;
+export const StyledSignIn = styled.main`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: fit-content;
+  box-shadow: 0 0 1.5rem rgba(255, 255, 255, 0.25);
+  border-radius: 0.3rem;
+  padding: 1rem;
+  margin-top: 4rem;
+  max-width: 100%;
 
-export const StyledErrorInfo = styled.section``;
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
 
-export const StyledSignInForm = styled.form``;
+  @media (max-width: 425px) {
+    box-shadow: none;
+  }
+`;
+
+export const StyledErrorInfo = styled.section`
+  font-size: 1.1rem;
+  font-weight: 700;
+  background-color: rgba(255, 0, 0, 0.5);
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+`;
+
+export const StyledSignInForm = styled.form`
+  display: flex;
+  flex-direction: column;
+
+  & input,
+  & button {
+    margin-bottom: 1.5rem;
+  }
+
+  & input {
+    color: white;
+    font-size: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.25);
+    border: none;
+    border-radius: 0.3rem;
+    padding: 0.5rem;
+  }
+
+  & label {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+  }
+
+  & input:last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  & button {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.3rem;
+    background-color: ${({ theme }) => theme.colors.darkBlue};
+  }
+
+  & button:hover {
+    filter: brightness(1.25);
+    cursor: pointer;
+  }
+
+  & .flex {
+    display: flex;
+    justify-content: left;
+    gap: 1rem;
+  }
+
+  & .flex input {
+    align-self: flex-end;
+    margin-top: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    accent-color: ${({ theme }) => theme.colors.darkBlue};
+    border-radius: 0.3rem;
+  }
+
+  @media (max-width: 425px) {
+    & button,
+    & input,
+    & label {
+      font-size: 1.3rem;
+    }
+  }
+`;
