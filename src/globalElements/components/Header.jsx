@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,10 +15,6 @@ export default function Header() {
   const currentUser = useSelector(selectCurrentUser);
 
   const { pathname } = useLocation();
-
-  useEffect(() => {
-    console.log(currentUser);
-  }, [currentUser]);
 
   return (
     <StyledHeader>

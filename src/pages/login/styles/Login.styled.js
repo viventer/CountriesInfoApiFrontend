@@ -96,3 +96,7 @@ export const StyledSignInForm = styled.form`
     }
   }
 `;
+
+export const StyledSignUp = styled.main``;
+
+export const StyledSignUpForm = styled.form``;

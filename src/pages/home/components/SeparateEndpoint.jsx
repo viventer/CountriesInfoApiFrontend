@@ -1,8 +1,3 @@
-import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import { useState } from "react";
-
 import { StyledSeparateEndpoint } from "../styles/Endpoints.styled";
 import SeparateEndpointDetails from "./SeparateEndpointDetails";
 

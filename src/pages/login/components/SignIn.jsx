@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -90,6 +90,10 @@ export default function Login() {
         loginData={{ username, password, persist }}
         usernameRef={usernameRef}
       />
+      <p>Need an Account? </p>
+      <Link to="/login" className="reactRouterLink">
+        Sign up
+      </Link>
     </StyledSignIn>
   );
 
