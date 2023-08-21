@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledSignIn = styled.main`
+export const StyledAuth = styled.main`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,6 +20,18 @@ export const StyledSignIn = styled.main`
   @media (max-width: 425px) {
     box-shadow: none;
   }
+
+  & .flex {
+    font-size: 1.2rem;
+    justify-content: left;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  & .flex p:last-child {
+    color: ${({ theme }) => theme.colors.lightGreen};
+    text-decoration-line: underline;
+  }
 `;
 
 export const StyledErrorInfo = styled.section`
@@ -31,7 +43,7 @@ export const StyledErrorInfo = styled.section`
   margin-bottom: 1rem;
 `;
 
-export const StyledSignInForm = styled.form`
+export const StyledAuthForm = styled.form`
   display: flex;
   flex-direction: column;
 
@@ -68,9 +80,13 @@ export const StyledSignInForm = styled.form`
     background-color: ${({ theme }) => theme.colors.darkBlue};
   }
 
-  & button:hover {
+  & .activeButton:hover {
     filter: brightness(1.25);
     cursor: pointer;
+  }
+
+  & .disabledButton {
+    filter: brightness(0.6);
   }
 
   & .flex {
@@ -88,6 +104,11 @@ export const StyledSignInForm = styled.form`
     border-radius: 0.3rem;
   }
 
+  span {
+    font-size: 1.2rem;
+    color: ${({ theme }) => theme.colors.lightGreen};
+  }
+
   @media (max-width: 425px) {
     & button,
     & input,
@@ -96,7 +117,3 @@ export const StyledSignInForm = styled.form`
     }
   }
 `;
-
-export const StyledSignUp = styled.main``;
-
-export const StyledSignUpForm = styled.form``;

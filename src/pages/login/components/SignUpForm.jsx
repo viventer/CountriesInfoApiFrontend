@@ -1,8 +1,8 @@
-import { StyledSignUpForm } from "../styles/Login.styled";
+import { StyledAuthForm } from "../styles/Login.styled";
 
-export function SignUpForm({ canSave, data, handlers }) {
+export function SignUpForm({ canSave, data, handlers, usernameRef }) {
   return (
-    <StyledSignUpForm onSubmit={handlers.onSignUpClicked}>
+    <StyledAuthForm onSubmit={handlers.onSignUpClicked}>
       <label htmlFor="username">
         Username: <span>[3-20 letters]</span>
       </label>
@@ -13,6 +13,7 @@ export function SignUpForm({ canSave, data, handlers }) {
         value={data.username}
         onChange={handlers.onUsernameChanged}
         required
+        ref={usernameRef}
       />
 
       <label htmlFor="password">
@@ -33,7 +34,21 @@ export function SignUpForm({ canSave, data, handlers }) {
         onChange={handlers.onConfirmPasswordChanged}
         required
       />
-      <button disabled={!canSave}>Sign up</button>
-    </StyledSignUpForm>
+      <button
+        disabled={!canSave}
+        className={canSave ? "activeButton" : "disabledButton"}
+      >
+        Sign up
+      </button>
+      <div className="flex">
+        <input
+          type="checkbox"
+          id="persist"
+          onChange={handlers.onPersistToggle}
+          checked={data.persist}
+        />
+        <label htmlFor="persist">Trust this device</label>
+      </div>
+    </StyledAuthForm>
   );
 }

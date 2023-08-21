@@ -1,8 +1,13 @@
-import { StyledSignInForm } from "../styles/Login.styled";
+import { StyledAuthForm } from "../styles/Login.styled";
 
-export default function SignInForm({ handlers, loginData, usernameRef }) {
+export default function SignInForm({
+  handlers,
+  loginData,
+  usernameRef,
+  canSubmit,
+}) {
   return (
-    <StyledSignInForm onSubmit={handlers.handleSubmit}>
+    <StyledAuthForm onSubmit={handlers.handleSubmit}>
       <label htmlFor="username">Username</label>
       <input
         type="text"
@@ -21,7 +26,12 @@ export default function SignInForm({ handlers, loginData, usernameRef }) {
         value={loginData.password}
         required
       />
-      <button>Sign in</button>
+      <button
+        className={canSubmit ? "activeButton" : "disabledButton"}
+        disabled={!canSubmit}
+      >
+        Sign in
+      </button>
       <div className="flex">
         <input
           type="checkbox"
@@ -31,6 +41,6 @@ export default function SignInForm({ handlers, loginData, usernameRef }) {
         />
         <label htmlFor="persist">Trust this device</label>
       </div>
-    </StyledSignInForm>
+    </StyledAuthForm>
   );
 }

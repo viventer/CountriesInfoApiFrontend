@@ -14,17 +14,15 @@ import usePersist from "../../../hooks/usePersist";
 
 import ErrorInfo from "./ErrorInfo";
 import SignInForm from "./SignInForm";
-import { StyledSignIn } from "../styles/Login.styled";
+import { StyledAuth } from "../styles/Login.styled";
 
 export default function Login() {
   const currentUser = useSelector(selectCurrentUser);
 
   useEffect(() => {
     if (currentUser) {
-      console.log("tak");
       navigate("/");
     }
-    console.log(currentUser);
   }, []);
 
   const usernameRef = useRef();
@@ -76,8 +74,10 @@ export default function Login() {
 
   if (isLoading) return <HashLoader color="fff" />;
 
+  const canSubmit = username && password;
+
   const content = (
-    <StyledSignIn>
+    <StyledAuth>
       {!errMsg && <ErrorInfo aria-live="assertive" message={errMsg} />}
       <h2>Sign in</h2>
       <SignInForm
@@ -89,12 +89,15 @@ export default function Login() {
         }}
         loginData={{ username, password, persist }}
         usernameRef={usernameRef}
+        canSubmit={canSubmit}
       />
-      <p>Need an Account? </p>
-      <Link to="/login" className="reactRouterLink">
-        Sign up
-      </Link>
-    </StyledSignIn>
+      <div className="flex">
+        <p>Need an Account? </p>
+        <Link to="/signup" className="reactRouterLink">
+          <p>Sign up</p>
+        </Link>
+      </div>
+    </StyledAuth>
   );
 
   return content;
