@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 
 export default function Header() {
   const currentUser = useSelector(selectCurrentUser);
+  console.log(currentUser);
 
   const { pathname } = useLocation();
 

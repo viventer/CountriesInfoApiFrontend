@@ -56,11 +56,11 @@ export default function Login() {
       setPassword("");
       navigate(from, { replace: true });
     } catch (err) {
-      if (!err.status) {
+      if (!err.originalStatus) {
         setErrMsg("No Server Response");
-      } else if (err.status === 400) {
+      } else if (err.originalStatus === 400) {
         setErrMsg("Missing Username or Password");
-      } else if (err.status === 401) {
+      } else if (err.originalStatus === 401) {
         setErrMsg("Unauthorized");
       } else {
         setErrMsg(err.data?.message);
@@ -72,13 +72,18 @@ export default function Login() {
   const handlePwdInput = (e) => setPassword(e.target.value);
   const handlePersistToggle = () => setPersist((prev) => !prev);
 
-  if (isLoading) return <HashLoader color="fff" />;
+  if (isLoading)
+    return (
+      <div className="flex">
+        <HashLoader color="fff" />
+      </div>
+    );
 
   const canSubmit = username && password;
 
   const content = (
     <StyledAuth>
-      {!errMsg && <ErrorInfo aria-live="assertive" message={errMsg} />}
+      {errMsg && <ErrorInfo aria-live="assertive" message={errMsg} />}
       <h2>Sign in</h2>
       <SignInForm
         handlers={{

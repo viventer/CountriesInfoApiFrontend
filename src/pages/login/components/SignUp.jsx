@@ -48,6 +48,8 @@ const NewUserForm = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [validConfirmPassword, setValidConfirmPassword] = useState(false);
 
+  const [errMsg, setErrMsg] = useState("");
+
   useEffect(() => {
     setValidUsername(USER_REGEX.test(username));
   }, [username]);
@@ -64,6 +66,10 @@ const NewUserForm = () => {
   useEffect(() => {
     usernameRef.current.focus();
   }, []);
+
+  useEffect(() => {
+    setErrMsg("");
+  }, [username, password]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -84,11 +90,25 @@ const NewUserForm = () => {
 
   const onSignUpClicked = async (e) => {
     e.preventDefault();
-    if (canSave) {
-      await register({ username, password });
+    if (!canSave) {
+      setErrMsg("Enter all the data");
+      return;
+    }
+    try {
+      await register({ username, password }).unwrap();
       const { accessToken } = await login({ username, password }).unwrap();
       dispatch(setCredentials({ username, accessToken }));
       navigate(from, { replace: true });
+    } catch (err) {
+      if (!err.originalStatus) {
+        setErrMsg("No Server Response");
+      } else if (err.originalStatus === 400) {
+        setErrMsg("Missing Username or Password");
+      } else if (err.originalStatus === 409) {
+        setErrMsg("Username is taken");
+      } else {
+        setErrMsg(err.data?.message);
+      }
     }
   };
 
@@ -100,7 +120,7 @@ const NewUserForm = () => {
 
   const content = (
     <StyledAuth>
-      {isError && <ErrorInfo message={error?.data?.message} />}
+      {errMsg && <ErrorInfo message={errMsg} />}
       <h2>Sign up</h2>
 
       <SignUpForm
