@@ -17,9 +17,9 @@ function App() {
         <Route path="signin" element={<SignIn />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="unauthorized" element={<Unauthorized />} />
+        <Route index element={<Home />} />
+        <Route path="howtostart" element={<HowToStart />} />
         <Route element={<PersistLogin />}>
-          <Route index element={<Home />} />
-          <Route path="howtostart" element={<HowToStart />} />
           <Route element={<RequireAuth allowedRoles={[2001]} />}>
             <Route path="/generateapikey" element={<GenerateApiKey />} />
           </Route>

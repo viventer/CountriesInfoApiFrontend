@@ -5,6 +5,7 @@ import usePersist from "../../hooks/usePersist";
 import { useSelector } from "react-redux";
 import { selectCurrentToken } from "../slices/authSlice";
 import ErrorInfo from "../../pages/login/components/ErrorInfo";
+import HashLoader from "react-spinners/HashLoader";
 
 const PersistLogin = () => {
   const [persist] = usePersist();
@@ -36,17 +37,15 @@ const PersistLogin = () => {
   }, []);
 
   let content;
-  if (isLoading) {
-    content = <p>Loading...</p>;
+  if (!persist) {
+    content = <Outlet />;
+  } else if (isLoading) {
+    content = <HashLoader color="fff" />;
   } else if (isError) {
     content = (
       <ErrorInfo message={`${error?.data?.message} - Please login again`} />
     );
-  } else if (
-    (isSuccess && trueSuccess) ||
-    (token && isUninitialized) ||
-    !persist
-  ) {
+  } else if ((isSuccess && trueSuccess) || (token && isUninitialized)) {
     content = <Outlet />;
   }
 
