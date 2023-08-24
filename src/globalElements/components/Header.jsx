@@ -7,13 +7,10 @@ import { StyledHeader } from "../styles/Header.styled";
 
 import SignInButton from "./SignInButton";
 import SignUpButton from "./SignUpButton";
-import { selectCurrentUser } from "../slices/authSlice";
 import GetApiKeyButton from "./GetApiKeyButton";
-import { useSelector } from "react-redux";
 
 export default function Header() {
-  const currentUser = useSelector(selectCurrentUser);
-  console.log(currentUser);
+  const isLogged = localStorage.getItem("isLogged");
 
   const { pathname } = useLocation();
 
@@ -27,7 +24,7 @@ export default function Header() {
           </Link>
         </button>
       </div>
-      {!currentUser ? (
+      {!isLogged ? (
         <div className="flex">
           <SignUpButton />
           <SignInButton />

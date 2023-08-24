@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 const authSlice = createSlice({
   name: "auth",
@@ -8,7 +9,6 @@ const authSlice = createSlice({
       const { username, accessToken } = action.payload;
       state.user = username;
       state.token = accessToken;
-      console.log(state.user);
     },
     logOut: (state, action) => {
       state.user = null;

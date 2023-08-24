@@ -8,7 +8,9 @@ import {
 } from "../../../globalElements/slices/authSlice";
 import { useRegisterMutation } from "../../../globalElements/slices/authApiSlice";
 import { useLoginMutation } from "../../../globalElements/slices/authApiSlice";
+
 import usePersist from "../../../hooks/usePersist";
+import useLocalStorage from "../../../hooks/useLocalStorage";
 
 import ErrorInfo from "./ErrorInfo";
 import { SignUpForm } from "./SignUpForm";
@@ -21,6 +23,8 @@ const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/;
 
 const NewUserForm = () => {
   const currentUser = useSelector(selectCurrentUser);
+
+  const [isLogged, setIsLogged] = useLocalStorage("isLogged", false);
 
   useEffect(() => {
     if (currentUser) {
@@ -98,6 +102,7 @@ const NewUserForm = () => {
       await register({ username, password }).unwrap();
       const { accessToken } = await login({ username, password }).unwrap();
       dispatch(setCredentials({ username, accessToken }));
+      setIsLogged(true);
       navigate(from, { replace: true });
     } catch (err) {
       if (!err.originalStatus) {
