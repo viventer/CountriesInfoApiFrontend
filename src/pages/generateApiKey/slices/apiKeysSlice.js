@@ -17,10 +17,14 @@ export const apiKeysSlice = apiSlice.injectEndpoints({
       transformResponse: (responseData) => {
         return keysAdapter.setAll(initialState, responseData);
       },
-      providesTags: (result, error, arg) => [
-        { type: "ApiKey", id: "LIST" },
-        ...result.ids.map((id) => ({ type: "ApiKey", id })),
-      ],
+      providesTags: (result, error, arg) => {
+        if (result?.ids) {
+          return [
+            { type: "ApiKey", id: "LIST" },
+            ...result.ids.map((id) => ({ type: "ApiKey", id })),
+          ];
+        } else return [{ type: "ApiKey", id: "LIST" }];
+      },
     }),
     generateApiKey: builder.query({
       query: () => ({

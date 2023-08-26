@@ -1,5 +1,8 @@
 import { useGetApiKeysQuery } from "../slices/apiKeysSlice";
+import { selectAllApiKeys } from "../slices/apiKeysSlice";
+
 import { StyledGenerateApiKey } from "../styles/GenerateApiKey.styled";
+import ErrorInfo from "../../login/components/ErrorInfo";
 
 import HashLoader from "react-spinners/HashLoader";
 
@@ -12,9 +15,35 @@ export default function GenerateApiKey() {
     error,
   } = useGetApiKeysQuery();
 
-  let content;
+  console.log(apiKeys);
 
-  if (isLoading) content = <HashLoader color="fff" />;
+  let otherContent;
+  let apiKeysList;
+  let heading;
+  let isAnyApiKey = apiKeys.ids.length;
+  if (isLoading) {
+    otherContent = (
+      <div className="flex">
+        <HashLoader color="fff" />
+      </div>
+    );
+  } else if (isError) {
+    otherContent = <ErrorInfo message={error} />;
+  } else if (isAnyApiKey) {
+    const { entities } = apiKeys;
+    const listItems = Object.values(entities).map((entity, index) => (
+      <li key={index}>{entity}</li>
+    ));
+    apiKeysList = <ol>{listItems}</ol>;
+    heading = <h2>Your API keys:</h2>;
+  } else {
+    heading = <h2>You don't have any API keys</h2>;
+  }
 
-  return <StyledGenerateApiKey></StyledGenerateApiKey>;
+  return (
+    <StyledGenerateApiKey>
+      {heading}
+      {otherContent || apiKeysList}
+    </StyledGenerateApiKey>
+  );
 }
