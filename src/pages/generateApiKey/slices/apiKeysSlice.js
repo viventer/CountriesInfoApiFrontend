@@ -1,7 +1,10 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../../app/api/apiSlice";
 
-const keysAdapter = createEntityAdapter([]);
+let entityIdCounter = 0;
+const keysAdapter = createEntityAdapter({
+  selectId: (entity) => entityIdCounter++,
+});
 
 const initialState = keysAdapter.getInitialState();
 

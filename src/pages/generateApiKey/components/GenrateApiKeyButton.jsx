@@ -1,5 +1,7 @@
-import { StyledGenerateApiKeyButton } from "../styles/GenerateApiKey.styled";
 import { useGenerateApiKeyMutation } from "../slices/apiKeysSlice";
+import { StyledButton } from "../../../globalElements/styles/Buttons.styled";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 export default function GenerateApiKeyButton() {
   const [getNewApiKey, { data: apiKey, isLoading, isSuccess, isError, error }] =
@@ -11,8 +13,9 @@ export default function GenerateApiKeyButton() {
   }
 
   return (
-    <StyledGenerateApiKeyButton onClick={generateApiKey}>
-      <p>GENERATE NEW</p>
-    </StyledGenerateApiKeyButton>
+    <StyledButton onClick={generateApiKey} className="flex">
+      <FontAwesomeIcon icon={faPlusCircle} />
+      <p className="bold">Generate new</p>
+    </StyledButton>
   );
 }

@@ -1,11 +1,12 @@
 import { useGetApiKeysQuery } from "../slices/apiKeysSlice";
-import { selectAllApiKeys } from "../slices/apiKeysSlice";
 
 import { StyledGenerateApiKey } from "../styles/GenerateApiKey.styled";
 import GenerateApiKeyButton from "./GenrateApiKeyButton";
 import ErrorInfo from "../../login/components/ErrorInfo";
+import HowToStartButton from "../../home/components/HowToStartButton";
 
 import HashLoader from "react-spinners/HashLoader";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export default function GenerateApiKey() {
   const {
@@ -15,8 +16,6 @@ export default function GenerateApiKey() {
     isError,
     error,
   } = useGetApiKeysQuery();
-
-  console.log(apiKeys);
 
   let otherContent;
   let apiKeysList;
@@ -32,8 +31,11 @@ export default function GenerateApiKey() {
     otherContent = <ErrorInfo message={error} />;
   } else if (isAnyApiKey) {
     const { entities } = apiKeys;
-    const listItems = Object.values(entities).map((entity, index) => (
-      <li key={index}>{entity}</li>
+    let listItems = Object.values(entities).map((entity, index) => (
+      <li key={index}>
+        {entity}
+        <button onClick={() => handleDelete(index)}>Delete</button>
+      </li>
     ));
     apiKeysList = <ol>{listItems}</ol>;
     heading = <h2>Your API keys:</h2>;
@@ -41,11 +43,16 @@ export default function GenerateApiKey() {
     heading = <h2>You don't have any API keys</h2>;
   }
 
+  function handleDelete(id) {}
+
+  const isMaxIdNumber = apiKeys?.ids?.length >= 3;
   return (
     <StyledGenerateApiKey>
       {heading}
       {otherContent || apiKeysList}
-      <GenerateApiKeyButton />
+      {!isMaxIdNumber && <GenerateApiKeyButton />}
+      <h3>Check how to use your API keys:</h3>
+      <HowToStartButton />
     </StyledGenerateApiKey>
   );
 }
