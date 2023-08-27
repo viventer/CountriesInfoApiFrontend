@@ -2,6 +2,7 @@ import { useGetApiKeysQuery } from "../slices/apiKeysSlice";
 import { selectAllApiKeys } from "../slices/apiKeysSlice";
 
 import { StyledGenerateApiKey } from "../styles/GenerateApiKey.styled";
+import GenerateApiKeyButton from "./GenrateApiKeyButton";
 import ErrorInfo from "../../login/components/ErrorInfo";
 
 import HashLoader from "react-spinners/HashLoader";
@@ -20,7 +21,7 @@ export default function GenerateApiKey() {
   let otherContent;
   let apiKeysList;
   let heading;
-  let isAnyApiKey = apiKeys.ids.length;
+  let isAnyApiKey = apiKeys?.ids?.length;
   if (isLoading) {
     otherContent = (
       <div className="flex">
@@ -44,6 +45,7 @@ export default function GenerateApiKey() {
     <StyledGenerateApiKey>
       {heading}
       {otherContent || apiKeysList}
+      <GenerateApiKeyButton />
     </StyledGenerateApiKey>
   );
 }

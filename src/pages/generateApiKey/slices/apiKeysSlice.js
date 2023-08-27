@@ -1,7 +1,7 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../../app/api/apiSlice";
 
-const keysAdapter = createEntityAdapter({});
+const keysAdapter = createEntityAdapter([]);
 
 const initialState = keysAdapter.getInitialState();
 
@@ -26,7 +26,7 @@ export const apiKeysSlice = apiSlice.injectEndpoints({
         } else return [{ type: "ApiKey", id: "LIST" }];
       },
     }),
-    generateApiKey: builder.query({
+    generateApiKey: builder.mutation({
       query: () => ({
         url: "/api-key/generate",
         method: "GET",
@@ -52,7 +52,7 @@ export const apiKeysSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetApiKeysQuery,
-  useGenerateApiKeyQuery,
+  useGenerateApiKeyMutation,
   useDeleteApiKeysMutation,
   useDeleteApiKeyMutation,
 } = apiKeysSlice;
