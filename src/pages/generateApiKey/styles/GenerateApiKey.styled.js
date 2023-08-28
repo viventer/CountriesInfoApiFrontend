@@ -1,16 +1,23 @@
 import styled from "styled-components";
 
 export const StyledGenerateApiKey = styled.main`
-  h2 {
+  & h2 {
     font-size: 1.6rem;
-  }
-
-  ol {
-    margin-top: 1rem;
     margin-bottom: 1rem;
   }
 
-  li {
+  & h2:nth-of-type(2) {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 0.1rem solid rgba(255, 255, 255, 0.4);
+    width: 100%;
+  }
+
+  & ol {
+    margin-bottom: 1rem;
+  }
+
+  & li {
     font-size: 1.5rem;
     list-style: none;
     display: flex;
@@ -20,7 +27,14 @@ export const StyledGenerateApiKey = styled.main`
     margin-bottom: 0.75rem;
   }
 
-  li::before {
+  & li > p {
+    font-family: "Ubuntu Mono", monospace;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  & li > p::before {
     content: counter(section-counter);
     font-size: 1.5rem;
     font-weight: 700;
@@ -34,9 +48,40 @@ export const StyledGenerateApiKey = styled.main`
     flex-shrink: 0;
   }
 
-  h3 {
+  .liButton {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 1.5rem;
+    margin-left: 1rem;
+
+    transition: filter 0.15s ease-in-out;
+  }
+
+  .liButton:hover {
+    filter: saturate(3);
+    cursor: pointer;
+  }
+
+  .liButton:active {
+    filter: opacity(0.8);
+  }
+
+  .deleteButton {
+    color: ${({ theme }) => theme.colors.peach};
+  }
+
+  .copyButton {
+    color: ${({ theme }) => theme.colors.lightGreen};
+  }
+
+  & span {
+    color: ${({ theme }) => theme.colors.lightBlue};
+  }
+
+  .generateNewButton {
+    padding: 0.5rem;
+    font-weight: 700;
+    gap: 0.3rem;
     font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-    margin-top: 3rem;
   }
 `;

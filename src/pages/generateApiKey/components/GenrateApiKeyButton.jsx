@@ -9,13 +9,12 @@ export default function GenerateApiKeyButton() {
 
   async function generateApiKey() {
     const response = await getNewApiKey();
-    console.log(response);
   }
 
   return (
-    <StyledButton onClick={generateApiKey} className="flex">
+    <StyledButton onClick={generateApiKey} className="flex generateNewButton">
       <FontAwesomeIcon icon={faPlusCircle} />
-      <p className="bold">Generate new</p>
+      <p>Generate new</p>
     </StyledButton>
   );
 }

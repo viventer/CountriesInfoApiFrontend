@@ -16,9 +16,10 @@ const theme = {
     darkGray: "#1F2421",
     darkBlue: "#216869",
     lightBlue: "#a0e3f9",
-    lightGreen: "#9CC5A1",
+    lightGreen: "#A0F9B6",
     darkGreen: "#407756",
     lightGray: "#DCE1DE",
+    peach: "#f9b6a0",
   },
 };
 root.render(

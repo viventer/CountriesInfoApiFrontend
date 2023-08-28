@@ -47,7 +47,7 @@ export const StyledHeader = styled.header`
     }
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 420px) {
     & {
       display: block;
     }
@@ -78,7 +78,7 @@ export const StyledSignInButton = styled.button`
   @media (max-width: 465px) {
     display: none;
   }
-  @media (max-width: 375px) {
+  @media (max-width: 420px) {
     display: flex;
   }
 `;

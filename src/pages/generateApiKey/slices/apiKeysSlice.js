@@ -44,7 +44,7 @@ export const apiKeysSlice = apiSlice.injectEndpoints({
       invalidatesTags: (result, error, arg) => [{ type: "ApiKey", id: "LIST" }],
     }),
     deleteApiKey: builder.mutation({
-      query: ({ id }) => ({
+      query: (id) => ({
         url: `/api-key/${id}`,
         method: "DELETE",
       }),
