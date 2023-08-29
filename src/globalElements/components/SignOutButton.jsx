@@ -1,15 +1,17 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { StyledButton } from "../styles/Buttons.styled";
 import { useLogoutMutation } from "../slices/authApiSlice";
 import ErrorInfo from "../../pages/login/components/ErrorInfo";
 import HashLoader from "react-spinners/HashLoader";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 export default function SignOutButton() {
   const [signOut, { data, isLoading, isError, error, isSuccess }] =
     useLogoutMutation();
 
   const navigate = useNavigate();
+
+  const { setIsLogged, isLogged } = useAuth();
 
   async function handleLogOut() {
     await signOut();
@@ -18,7 +20,9 @@ export default function SignOutButton() {
     } else if (isLoading) {
       return <HashLoader color="fff" />;
     } else if (isSuccess) {
-      localStorage.setItem("isLogged", false);
+      if (isLogged) {
+        setIsLogged(false);
+      }
       navigate("/");
     }
   }

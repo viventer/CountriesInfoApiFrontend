@@ -15,6 +15,7 @@ import usePersist from "../../../hooks/usePersist";
 import ErrorInfo from "./ErrorInfo";
 import SignInForm from "./SignInForm";
 import { StyledAuth } from "../styles/Login.styled";
+import useAuth from "../../../hooks/useAuth";
 
 export default function Login() {
   const currentUser = useSelector(selectCurrentUser);
@@ -24,6 +25,8 @@ export default function Login() {
       navigate("/");
     }
   }, []);
+
+  const { setIsLogged, isLogged } = useAuth();
 
   const usernameRef = useRef();
   const [username, setUsername] = useState("");
@@ -54,7 +57,9 @@ export default function Login() {
       dispatch(setCredentials({ username, accessToken }));
       setUsername("");
       setPassword("");
-      localStorage.setItem("isLogged", true);
+      if (!isLogged) {
+        setIsLogged(true);
+      }
       navigate(from, { replace: true });
     } catch (err) {
       if (!err.originalStatus) {

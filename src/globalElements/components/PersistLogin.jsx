@@ -8,11 +8,14 @@ import ErrorInfo from "../../pages/login/components/ErrorInfo";
 import HashLoader from "react-spinners/HashLoader";
 
 import useLocalStorage from "../../hooks/useLocalStorage";
+import useAuth from "../../hooks/useAuth";
 
 const PersistLogin = () => {
   const [persist] = usePersist();
   const token = useSelector(selectCurrentToken);
   const effectRan = useRef(false);
+
+  const { setIsLogged, isLogged } = useAuth();
 
   const [trueSuccess, setTrueSuccess] = useState(false);
 
@@ -44,10 +47,14 @@ const PersistLogin = () => {
   } else if (isLoading) {
     content = <HashLoader color="fff" />;
   } else if (isError) {
-    localStorage.setItem("isLogged", false);
+    if (isLogged) {
+      setIsLogged(false);
+    }
     content = <ErrorInfo message={`${error?.error} - Please login again`} />;
   } else if ((isSuccess && trueSuccess) || (token && isUninitialized)) {
-    localStorage.setItem("isLogged", true);
+    if (!isLogged) {
+      setIsLogged(true);
+    }
     content = <Outlet />;
   }
 

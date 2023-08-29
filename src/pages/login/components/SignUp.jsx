@@ -16,12 +16,15 @@ import { SignUpForm } from "./SignUpForm";
 
 import { StyledAuth } from "../styles/Login.styled";
 import HashLoader from "react-spinners/HashLoader";
+import useAuth from "../../../hooks/useAuth";
 
 const USER_REGEX = /^[A-z]{3,20}$/;
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/;
 
 const NewUserForm = () => {
   const currentUser = useSelector(selectCurrentUser);
+
+  const { setIsLogged, isLogged } = useAuth();
 
   useEffect(() => {
     if (currentUser) {
@@ -99,7 +102,9 @@ const NewUserForm = () => {
       await register({ username, password }).unwrap();
       const { accessToken } = await login({ username, password }).unwrap();
       dispatch(setCredentials({ username, accessToken }));
-      localStorage.setItem("isLogged", true);
+      if (!isLogged) {
+        setIsLogged(true);
+      }
       navigate(from, { replace: true });
     } catch (err) {
       if (!err.originalStatus) {

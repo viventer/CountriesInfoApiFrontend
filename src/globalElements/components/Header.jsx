@@ -9,18 +9,12 @@ import SignInButton from "./SignInButton";
 import SignUpButton from "./SignUpButton";
 import GetApiKeyButton from "./GetApiKeyButton";
 
-import { useEffect, useState } from "react";
 import SignOutButton from "./SignOutButton";
+import useAuth from "../../hooks/useAuth";
 
 export default function Header() {
-  const [isLogged, setIsLogged] = useState(
-    localStorage.getItem("isLogged") === "true"
-  );
-
-  useEffect(() => {
-    const storedIsLogged = localStorage.getItem("isLogged");
-    setIsLogged(storedIsLogged === "true"); // Convert string to boolean
-  }, [isLogged]);
+  const { isLogged } = useAuth();
+  console.log(isLogged); // -> undefined
 
   const { pathname } = useLocation();
 
