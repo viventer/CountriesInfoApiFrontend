@@ -11,7 +11,6 @@ import { useLoginMutation } from "../../../globalElements/slices/authApiSlice";
 import HashLoader from "react-spinners/HashLoader";
 
 import usePersist from "../../../hooks/usePersist";
-import useLocalStorage from "../../../hooks/useLocalStorage";
 
 import ErrorInfo from "./ErrorInfo";
 import SignInForm from "./SignInForm";
@@ -19,8 +18,6 @@ import { StyledAuth } from "../styles/Login.styled";
 
 export default function Login() {
   const currentUser = useSelector(selectCurrentUser);
-
-  const [isLogged, setIsLogged] = useLocalStorage("isLogged", false);
 
   useEffect(() => {
     if (currentUser) {
@@ -55,9 +52,9 @@ export default function Login() {
     try {
       const { accessToken } = await login({ username, password }).unwrap();
       dispatch(setCredentials({ username, accessToken }));
-      setIsLogged(true);
       setUsername("");
       setPassword("");
+      localStorage.setItem("isLogged", true);
       navigate(from, { replace: true });
     } catch (err) {
       if (!err.originalStatus) {

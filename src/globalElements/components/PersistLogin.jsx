@@ -7,6 +7,8 @@ import { selectCurrentToken } from "../slices/authSlice";
 import ErrorInfo from "../../pages/login/components/ErrorInfo";
 import HashLoader from "react-spinners/HashLoader";
 
+import useLocalStorage from "../../hooks/useLocalStorage";
+
 const PersistLogin = () => {
   const [persist] = usePersist();
   const token = useSelector(selectCurrentToken);
@@ -42,10 +44,10 @@ const PersistLogin = () => {
   } else if (isLoading) {
     content = <HashLoader color="fff" />;
   } else if (isError) {
-    content = (
-      <ErrorInfo message={`${error?.data?.message} - Please login again`} />
-    );
+    localStorage.setItem("isLogged", false);
+    content = <ErrorInfo message={`${error?.error} - Please login again`} />;
   } else if ((isSuccess && trueSuccess) || (token && isUninitialized)) {
+    localStorage.setItem("isLogged", true);
     content = <Outlet />;
   }
 

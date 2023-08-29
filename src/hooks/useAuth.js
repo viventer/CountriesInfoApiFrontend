@@ -10,7 +10,6 @@ const useAuth = () => {
 
   if (token) {
     const decoded = jwtDecode(token);
-    console.log(decoded);
     const { username, roles } = decoded.UserInfo;
 
     isEditor = roles?.editor ? true : false;

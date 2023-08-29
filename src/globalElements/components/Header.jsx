@@ -9,8 +9,18 @@ import SignInButton from "./SignInButton";
 import SignUpButton from "./SignUpButton";
 import GetApiKeyButton from "./GetApiKeyButton";
 
+import { useEffect, useState } from "react";
+import SignOutButton from "./SignOutButton";
+
 export default function Header() {
-  const isLogged = localStorage.getItem("isLogged");
+  const [isLogged, setIsLogged] = useState(
+    localStorage.getItem("isLogged") === "true"
+  );
+
+  useEffect(() => {
+    const storedIsLogged = localStorage.getItem("isLogged");
+    setIsLogged(storedIsLogged === "true"); // Convert string to boolean
+  }, [isLogged]);
 
   const { pathname } = useLocation();
 
@@ -30,7 +40,10 @@ export default function Header() {
           <SignInButton />
         </div>
       ) : (
-        <GetApiKeyButton />
+        <div className="flex">
+          <GetApiKeyButton />
+          <SignOutButton />
+        </div>
       )}
     </StyledHeader>
   );
