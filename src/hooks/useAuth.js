@@ -25,7 +25,15 @@ const useAuth = () => {
     if (isAdmin) status = "Admin";
     if (isEditor) status = "Editor";
 
-    return { username, roles, status, isEditor, isAdmin };
+    return {
+      username,
+      roles,
+      status,
+      isEditor,
+      isAdmin,
+      isLogged,
+      setIsLogged,
+    };
   }
 
   return {

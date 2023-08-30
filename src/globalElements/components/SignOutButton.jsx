@@ -6,12 +6,11 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 export default function SignOutButton() {
-  const [signOut, { data, isLoading, isError, error, isSuccess }] =
-    useLogoutMutation();
+  const [signOut, { isLoading, isError, error }] = useLogoutMutation();
 
   const navigate = useNavigate();
 
-  const { setIsLogged, isLogged } = useAuth();
+  const { setIsLogged } = useAuth();
 
   async function handleLogOut() {
     await signOut();
@@ -19,11 +18,10 @@ export default function SignOutButton() {
       return <ErrorInfo message={error} />;
     } else if (isLoading) {
       return <HashLoader color="fff" />;
-    } else if (isSuccess) {
-      if (isLogged) {
-        setIsLogged(false);
-      }
+    } else {
+      setIsLogged(false);
       navigate("/");
+      window.location.reload();
     }
   }
 
