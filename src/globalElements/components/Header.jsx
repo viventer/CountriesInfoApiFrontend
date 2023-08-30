@@ -14,7 +14,6 @@ import useAuth from "../../hooks/useAuth";
 
 export default function Header() {
   const { isLogged } = useAuth();
-  console.log(isLogged); // -> undefined
 
   const { pathname } = useLocation();
 
@@ -28,7 +27,7 @@ export default function Header() {
           </Link>
         </button>
       </div>
-      {!isLogged ? (
+      {!isLogged && isLogged != undefined ? (
         <div className="flex">
           <SignUpButton />
           <SignInButton />
