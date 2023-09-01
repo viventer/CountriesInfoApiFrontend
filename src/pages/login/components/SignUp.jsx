@@ -11,7 +11,7 @@ import { useLoginMutation } from "../../../globalElements/slices/authApiSlice";
 
 import usePersist from "../../../hooks/usePersist";
 
-import ErrorInfo from "./ErrorInfo";
+import ErrorInfo from "../../../globalElements/components/ErrorInfo";
 import { SignUpForm } from "./SignUpForm";
 
 import { StyledAuth } from "../styles/Login.styled";

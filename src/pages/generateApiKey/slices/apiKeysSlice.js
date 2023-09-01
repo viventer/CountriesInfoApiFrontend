@@ -60,20 +60,12 @@ export const {
   useDeleteApiKeyMutation,
 } = apiKeysSlice;
 
-// returns the query result object
 export const selectApiKeysResult = apiKeysSlice.endpoints.getApiKeys.select();
 
-// creates memoized selector
 const selectApiKeysData = createSelector(
   selectApiKeysResult,
-  (apiKeysResult) => apiKeysResult.data // normalized state object with ids & entities
+  (apiKeysResult) => apiKeysResult.data
 );
 
-//getSelectors creates these selectors and we rename them with aliases using destructuring
-export const {
-  selectAll: selectAllApiKeys,
-  selectIds: selectApiKeyIds,
-  // Pass in a selector that returns the notes slice of state
-} = keysAdapter.getSelectors(
-  (state) => selectApiKeysData(state) ?? initialState
-);
+export const { selectAll: selectAllApiKeys, selectIds: selectApiKeyIds } =
+  keysAdapter.getSelectors((state) => selectApiKeysData(state) ?? initialState);

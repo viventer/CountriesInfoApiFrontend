@@ -12,7 +12,7 @@ import HashLoader from "react-spinners/HashLoader";
 
 import usePersist from "../../../hooks/usePersist";
 
-import ErrorInfo from "./ErrorInfo";
+import ErrorInfo from "../../../globalElements/components/ErrorInfo";
 import SignInForm from "./SignInForm";
 import { StyledAuth } from "../styles/Login.styled";
 import useAuth from "../../../hooks/useAuth";

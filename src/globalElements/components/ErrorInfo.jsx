@@ -1,4 +1,4 @@
-import { StyledErrorInfo } from "../styles/Login.styled";
+import { StyledErrorInfo } from "../../pages/login/styles/Login.styled";
 
 export default function ErrorInfo({ message }) {
   return (

@@ -1,14 +1,15 @@
-import { useGenerateApiKeyMutation } from "../slices/apiKeysSlice";
-import { StyledButton } from "../../../globalElements/styles/Buttons.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+
+import { useGenerateApiKeyMutation } from "../slices/apiKeysSlice";
+
+import { StyledButton } from "../../../globalElements/styles/Buttons.styled";
 
 export default function GenerateApiKeyButton() {
-  const [getNewApiKey, { data: apiKey, isLoading, isSuccess, isError, error }] =
-    useGenerateApiKeyMutation();
+  const [getNewApiKey] = useGenerateApiKeyMutation();
 
   async function generateApiKey() {
-    const response = await getNewApiKey();
+    await getNewApiKey();
   }
 
   return (

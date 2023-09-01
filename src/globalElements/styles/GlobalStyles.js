@@ -5,8 +5,6 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  * {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-tap-highlight-color: transparent;
   }
@@ -21,6 +19,7 @@ export const GlobalStyles = createGlobalStyle`
     margin-right: auto;
     margin-left: auto;
   }
+
   .flex {
     display: flex;
     align-items: center;

@@ -4,7 +4,6 @@ import Layout from "./globalElements/components/Layout";
 import Home from "./pages/home/components/Home";
 import SignIn from "./pages/login/components/SignIn";
 import SignUp from "./pages/login/components/SignUp";
-import Unauthorized from "./globalElements/components/Unauthorized";
 import PersistLogin from "./globalElements/components/PersistLogin";
 import RequireAuth from "./globalElements/components/RequireAuth";
 import GenerateApiKey from "./pages/generateApiKey/components/GenerateApiKey";
@@ -16,11 +15,10 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route path="signin" element={<SignIn />} />
         <Route path="signup" element={<SignUp />} />
-        <Route path="unauthorized" element={<Unauthorized />} />
         <Route index element={<Home />} />
         <Route path="howtostart" element={<HowToStart />} />
         <Route element={<PersistLogin />}>
-          <Route element={<RequireAuth allowedRoles={[2001]} />}>
+          <Route element={<RequireAuth />}>
             <Route path="/generateapikey" element={<GenerateApiKey />} />
           </Route>
         </Route>

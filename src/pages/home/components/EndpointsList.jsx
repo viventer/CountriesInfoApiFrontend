@@ -1,5 +1,4 @@
 import { StyledEndpointsList } from "../styles/Endpoints.styled";
-
 import SeparateEndpoint from "./SeparateEndpoint";
 
 import endpointsData from "../data/endpointsData.json";

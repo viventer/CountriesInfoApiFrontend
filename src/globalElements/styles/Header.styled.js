@@ -30,7 +30,8 @@ export const StyledHeader = styled.header`
     padding: 0.4rem;
   }
 
-  & button:hover {
+  & button:hover,
+  & .reactRouterLink:hover {
     filter: brightness(0.9);
     cursor: pointer;
   }

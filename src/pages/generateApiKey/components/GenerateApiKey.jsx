@@ -1,19 +1,17 @@
+import { ApiKeyListItem } from "./ApiKeyListItem";
+import { useState } from "react";
+
+import HashLoader from "react-spinners/HashLoader";
+
 import {
   useDeleteApiKeyMutation,
   useGetApiKeysQuery,
 } from "../slices/apiKeysSlice";
 
 import { StyledGenerateApiKey } from "../styles/GenerateApiKey.styled";
-import GenerateApiKeyButton from "./GenrateApiKeyButton";
-import ErrorInfo from "../../login/components/ErrorInfo";
+import GenerateApiKeyButton from "./GenerateApiKeyButton";
+import ErrorInfo from "../../../globalElements/components/ErrorInfo";
 import HowToStartButton from "../../home/components/HowToStartButton";
-
-import HashLoader from "react-spinners/HashLoader";
-import { faCopy, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import CopyToClipboard from "react-copy-to-clipboard";
-
-import { useState } from "react";
 
 export default function GenerateApiKey() {
   const [errorMsg, setErrorMsg] = useState();
@@ -44,34 +42,20 @@ export default function GenerateApiKey() {
 
   function getListItems(apiKeys) {
     return Object.values(apiKeys).map((apiKey, index) => (
-      <li key={index}>
-        <p>{`${apiKey.slice(0, 10)}...`}</p>
-        <CopyToClipboard text={apiKey}>
-          <button
-            className="copyButton liButton"
-            aria-label="copy to clipboard"
-          >
-            <FontAwesomeIcon icon={faCopy} />
-          </button>
-        </CopyToClipboard>
-        <button
-          onClick={() => handleDelete(index)}
-          className="deleteButton liButton"
-          aria-label="delete"
-        >
-          <FontAwesomeIcon icon={faTrash} />
-        </button>
-      </li>
+      <ApiKeyListItem
+        key={index}
+        index={index}
+        apiKey={apiKey}
+        handleDelete={handleDelete}
+      />
     ));
   }
 
-  const [
-    removeApiKey,
-    { isSuccess: isDeleteSuccess, isError: isDeleteError, error: deleteError },
-  ] = useDeleteApiKeyMutation();
+  const [removeApiKey, { isError: isDeleteError, error: deleteError }] =
+    useDeleteApiKeyMutation();
 
   async function handleDelete(id) {
-    const response = await removeApiKey(id);
+    await removeApiKey(id);
     if (isDeleteError) {
       setErrorMsg(deleteError.data.message);
     }

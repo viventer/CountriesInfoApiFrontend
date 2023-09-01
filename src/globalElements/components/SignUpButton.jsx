@@ -1,6 +1,6 @@
-import { StyledSignUpButton } from "../styles/Header.styled";
-
 import { Link, useLocation } from "react-router-dom";
+
+import { StyledSignUpButton } from "../styles/Header.styled";
 
 export default function SignUpButton() {
   const { pathname } = useLocation();

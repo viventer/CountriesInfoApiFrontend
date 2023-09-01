@@ -1,14 +1,15 @@
-import { Outlet, Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import { useRefreshMutation } from "../slices/authApiSlice";
-import usePersist from "../../hooks/usePersist";
+import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectCurrentToken } from "../slices/authSlice";
-import ErrorInfo from "../../pages/login/components/ErrorInfo";
 import HashLoader from "react-spinners/HashLoader";
 
-import useLocalStorage from "../../hooks/useLocalStorage";
+import { useRefreshMutation } from "../slices/authApiSlice";
+import { selectCurrentToken } from "../slices/authSlice";
+
+import ErrorInfo from "./ErrorInfo";
+
 import useAuth from "../../hooks/useAuth";
+import usePersist from "../../hooks/usePersist";
 
 const PersistLogin = () => {
   const [persist] = usePersist();

@@ -1,6 +1,6 @@
-import { StyledSignInButton } from "../styles/Header.styled";
-
 import { Link, useLocation } from "react-router-dom";
+
+import { StyledSignInButton } from "../styles/Header.styled";
 
 export default function SignInButton() {
   const { pathname } = useLocation();
