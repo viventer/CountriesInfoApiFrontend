@@ -8,6 +8,7 @@ import PersistLogin from "./globalElements/components/PersistLogin";
 import RequireAuth from "./globalElements/components/RequireAuth";
 import GenerateApiKey from "./pages/generateApiKey/components/GenerateApiKey";
 import HowToStart from "./pages/howToStart/components/HowToStart";
+import Missing from "./globalElements/components/Missing";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/generateapikey" element={<GenerateApiKey />} />
           </Route>
         </Route>
+        <Route path="*" element={<Missing />} />
       </Route>
     </Routes>
   );

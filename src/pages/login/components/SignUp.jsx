@@ -1,47 +1,35 @@
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
+import HashLoader from "react-spinners/HashLoader";
+import { useDispatch } from "react-redux";
 
-import { useDispatch, useSelector } from "react-redux";
-import {
-  selectCurrentUser,
-  setCredentials,
-} from "../../../globalElements/slices/authSlice";
+import { setCredentials } from "../../../globalElements/slices/authSlice";
 import { useRegisterMutation } from "../../../globalElements/slices/authApiSlice";
 import { useLoginMutation } from "../../../globalElements/slices/authApiSlice";
 
 import usePersist from "../../../hooks/usePersist";
+import useAuth from "../../../hooks/useAuth";
 
 import ErrorInfo from "../../../globalElements/components/ErrorInfo";
 import { SignUpForm } from "./SignUpForm";
-
 import { StyledAuth } from "../styles/Login.styled";
-import HashLoader from "react-spinners/HashLoader";
-import useAuth from "../../../hooks/useAuth";
 
 const USER_REGEX = /^[A-z]{3,20}$/;
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/;
 
-const NewUserForm = () => {
-  const currentUser = useSelector(selectCurrentUser);
-
+export default function SignUp() {
   const { setIsLogged, isLogged } = useAuth();
-
-  useEffect(() => {
-    if (currentUser) {
-      navigate("/");
-    }
-  }, []);
-
-  const [register, { isLoading, isSuccess, isError, error }] =
-    useRegisterMutation();
-
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    if (isLogged) {
+      navigate(from, { replace: true });
+    }
+  }, []);
 
-  const [login, { isLoginLoading }] = useLoginMutation();
+  const [register, { isLoading, isSuccess }] = useRegisterMutation();
 
   const [persist, setPersist] = usePersist();
 
@@ -56,24 +44,15 @@ const NewUserForm = () => {
 
   useEffect(() => {
     setValidUsername(USER_REGEX.test(username));
-  }, [username]);
-
-  useEffect(() => {
     setValidPassword(PWD_REGEX.test(password));
-  }, [password]);
-
-  useEffect(() => {
     setValidConfirmPassword(password === confirmPassword && password);
-  }, [confirmPassword]);
+    setErrMsg("");
+  }, [username, password, confirmPassword]);
 
   const usernameRef = useRef();
   useEffect(() => {
     usernameRef.current.focus();
   }, []);
-
-  useEffect(() => {
-    setErrMsg("");
-  }, [username, password]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -91,6 +70,10 @@ const NewUserForm = () => {
   const onPasswordChanged = (e) => setPassword(e.target.value);
   const onConfirmPasswordChanged = (e) => setConfirmPassword(e.target.value);
   const onPersistToggle = () => setPersist((prev) => !prev);
+
+  const dispatch = useDispatch();
+
+  const [login, { isLoginLoading }] = useLoginMutation();
 
   const onSignUpClicked = async (e) => {
     e.preventDefault();
@@ -158,5 +141,4 @@ const NewUserForm = () => {
   );
 
   return content;
-};
-export default NewUserForm;
+}

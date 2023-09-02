@@ -1,15 +1,12 @@
-import { StyledHowToStartButton } from "../styles/Home.styled";
 import { useNavigate } from "react-router-dom";
+
+import { StyledHowToStartButton } from "../styles/Home.styled";
 
 export default function HowToStartButton() {
   const navigate = useNavigate();
 
-  function changePage() {
-    navigate("/howtostart");
-  }
-
   return (
-    <StyledHowToStartButton onClick={changePage}>
+    <StyledHowToStartButton onClick={() => navigate("/howtostart")}>
       <p>How to start?</p>
     </StyledHowToStartButton>
   );

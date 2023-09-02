@@ -1,6 +1,6 @@
 import EndpointsList from "./EndpointsList";
-import { StyledHome } from "../styles/Home.styled";
 import HowToStartButton from "./HowToStartButton";
+import { StyledHome } from "../styles/Home.styled";
 
 export default function Home() {
   return (

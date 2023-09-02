@@ -1,46 +1,35 @@
 import { useRef, useState, useEffect } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
+import HashLoader from "react-spinners/HashLoader";
+import { useDispatch } from "react-redux";
 
-import { useDispatch, useSelector } from "react-redux";
-import {
-  selectCurrentUser,
-  setCredentials,
-} from "../../../globalElements/slices/authSlice";
+import { setCredentials } from "../../../globalElements/slices/authSlice";
 import { useLoginMutation } from "../../../globalElements/slices/authApiSlice";
 
-import HashLoader from "react-spinners/HashLoader";
-
 import usePersist from "../../../hooks/usePersist";
+import useAuth from "../../../hooks/useAuth";
 
 import ErrorInfo from "../../../globalElements/components/ErrorInfo";
 import SignInForm from "./SignInForm";
 import { StyledAuth } from "../styles/Login.styled";
-import useAuth from "../../../hooks/useAuth";
 
 export default function Login() {
-  const currentUser = useSelector(selectCurrentUser);
+  const { setIsLogged, isLogged } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
-    if (currentUser) {
-      navigate("/");
+    if (isLogged) {
+      navigate(from, { replace: true });
     }
   }, []);
-
-  const { setIsLogged, isLogged } = useAuth();
 
   const usernameRef = useRef();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [persist, setPersist] = usePersist();
-
-  const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
-
-  const dispatch = useDispatch();
-
-  const [login, { isLoading }] = useLoginMutation();
 
   useEffect(() => {
     usernameRef.current.focus();
@@ -49,6 +38,10 @@ export default function Login() {
   useEffect(() => {
     setErrMsg("");
   }, [username, password]);
+
+  const dispatch = useDispatch();
+
+  const [login, { isLoading }] = useLoginMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

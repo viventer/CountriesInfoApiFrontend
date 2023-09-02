@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
-import { StyledSeparateEndpointDetails } from "../styles/Endpoints.styled";
+import { useContext } from "react";
 
 import ReactJson from "react-json-view";
 import { ThemeContext } from "styled-components";
+
+import { StyledSeparateEndpointDetails } from "../styles/Endpoints.styled";
 
 export default function SeparateEndpointDetails({
   exampleUrl,
