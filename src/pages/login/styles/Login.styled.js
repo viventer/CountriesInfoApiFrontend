@@ -17,10 +17,6 @@ export const StyledAuth = styled.main`
     margin-bottom: 1rem;
   }
 
-  @media (max-width: 425px) {
-    box-shadow: none;
-  }
-
   & .flex {
     font-size: 1.2rem;
     justify-content: left;
@@ -31,6 +27,10 @@ export const StyledAuth = styled.main`
   & .flex p:last-child {
     color: ${({ theme }) => theme.colors.lightGreen};
     text-decoration-line: underline;
+  }
+
+  @media (max-width: 425px) {
+    box-shadow: none;
   }
 `;
 
